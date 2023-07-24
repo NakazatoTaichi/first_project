@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ScheduleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/schedules', [ScheduleController::class,'index'])->name('schedules.index');
+
+Route::get('/schedules/create', [ScheduleController::class,'create'])->name('schedule.create');
+Route::post('/schedules/store', [ScheduleController::class,'store'])->name('schedule.store');
+// create画面のnameが単数形になっている

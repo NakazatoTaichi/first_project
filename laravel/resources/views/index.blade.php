@@ -12,23 +12,25 @@
         </div>
     </div>
 
-    <table class="table table-bordered table-hover">
+    <table class="table table-striped table-hover">
         <tr>
             <th>日付</th>
             <th>外出予定</th>
             <th>夕飯</th>
-            <th>外出時間</th>
-            <th>帰宅時間</th>
-            <th>メモ</th>
+            <th>外出時刻</th>
+            <th>帰宅時刻</th>
+            <th></th>
+            <!-- <th>メモ</th> -->
         </tr>
         @foreach($schedules as $schedule)
         <tr>
-            <th>{{ $schedule->created_at }}</th>
-            <th>{{ $schedule->going_out }}</th>
-            <th>{{ $schedule->dinner }}</th>
-            <th>{{ $schedule->departure_time }}</th>
-            <th>{{ $schedule->arrival_time }}</th>
-            <th>{{ $schedule->memo }}</th>
+            <td>{{ $schedule->created_at }}</td>
+            <td><a href="{{ route('schedule.show',$schedule->id) }}">{{ $schedule->going_out }}</a></td>
+            <td>{{ $schedule->dinner }}</td>
+            <td>{{ $schedule->departure_time }}</td>
+            <td>{{ $schedule->arrival_time }}</td>
+            <!-- <td style="text-algin:left">{{ $schedule->memo }}</td> -->
+            <td style="text-align:center"><a class="btn btn-primary" href="{{ route('schedule.edit', $schedule->id) }}">変更</a></td>
         </tr>
         @endforeach
     </table>

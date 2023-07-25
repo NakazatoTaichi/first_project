@@ -41,13 +41,22 @@ class ScheduleController extends Controller
         //     'going_out' =>'required',
         //     'dinner' =>'required',
         // ]);
-        Schedule::create([
-            'going_out' => $request['going_out'],
-            'dinner' => $request['dinner'],
-            'departure_time' => $request['departure_time'],
-            'arrival_time' => $request['arrival_time'],
-            'memo' => $request['memo']
-        ]);
+
+        // Schedule::create([
+        //     'going_out' => $request['going_out'],
+        //     'dinner' => $request['dinner'],
+        //     'departure_time' => $request['departure_time'],
+        //     'arrival_time' => $request['arrival_time'],
+        //     'memo' => $request['memo']
+        // ]);
+
+        $schedule = new Schedule;
+        $schedule->going_out = $request->input(["going_out"]);
+        $schedule->dinner = $request->input(["dinner"]);
+        $schedule->departure_time = $request->input(["departure_time"]);
+        $schedule->arrival_time = $request->input(["arrival_time"]);
+        $schedule->memo = $request->input(["memo"]);
+        $schedule->save();
 
         return redirect()->route('schedules.index');
     }
@@ -60,7 +69,7 @@ class ScheduleController extends Controller
      */
     public function show(Schedule $schedule)
     {
-        //
+        return view('show', compact('schedule'));
     }
 
     /**
@@ -71,7 +80,7 @@ class ScheduleController extends Controller
      */
     public function edit(Schedule $schedule)
     {
-        //
+        return view('edit', compact('schedule'));
     }
 
     /**
@@ -83,7 +92,14 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, Schedule $schedule)
     {
-        //
+        $schedule->going_out = $request->input(["going_out"]);
+        $schedule->dinner = $request->input(["dinner"]);
+        $schedule->departure_time = $request->input(["departure_time"]);
+        $schedule->arrival_time = $request->input(["arrival_time"]);
+        $schedule->memo = $request->input(["memo"]);
+        $schedule->save();
+
+        return redirect()->route('schedules.index');
     }
 
     /**

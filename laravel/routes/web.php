@@ -23,3 +23,7 @@ Route::get('/schedules', [ScheduleController::class,'index'])->name('schedules.i
 Route::get('/schedules/create', [ScheduleController::class,'create'])->name('schedule.create');
 Route::post('/schedules/store', [ScheduleController::class,'store'])->name('schedule.store');
 // create画面のnameが単数形になっている
+Route::get('/schedules/edit/{schedule}', [ScheduleController::class,'edit'])->name('schedule.edit');
+Route::put('/schedule/edit/{schedule}', [ScheduleController::class,'update'])->name('schedule.update');
+
+Route::get('/schedules/show/{schedule}', [ScheduleController::class,'show'])->name('schedule.show');

@@ -14,7 +14,8 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        $schedules = Schedule::all();
+        // $schedules = Schedule::all();
+        $schedules = Schedule::orderBy('created_at', 'desc')->get();
 
         return view('index',compact('schedules'));
     }
@@ -58,7 +59,7 @@ class ScheduleController extends Controller
         $schedule->memo = $request->input(["memo"]);
         $schedule->save();
 
-        return redirect()->route('schedules.index');
+        return redirect()->route('schedules.index')->with('success','今日の予定を共有しました');
     }
 
     /**
@@ -99,7 +100,7 @@ class ScheduleController extends Controller
         $schedule->memo = $request->input(["memo"]);
         $schedule->save();
 
-        return redirect()->route('schedules.index');
+        return redirect()->route('schedules.index')->with('success','今日の予定を変更しました');
     }
 
     /**
@@ -110,6 +111,8 @@ class ScheduleController extends Controller
      */
     public function destroy(Schedule $schedule)
     {
-        //
+        $schedule->delete();
+        return redirect()->route('schedules.index')->with('success','今日の予定を削除しました');
     }
+
 }

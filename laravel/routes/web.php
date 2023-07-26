@@ -27,3 +27,5 @@ Route::get('/schedules/edit/{schedule}', [ScheduleController::class,'edit'])->na
 Route::put('/schedule/edit/{schedule}', [ScheduleController::class,'update'])->name('schedule.update');
 
 Route::get('/schedules/show/{schedule}', [ScheduleController::class,'show'])->name('schedule.show');
+
+Route::delete('/schedules/{schedule}', [ScheduleController::class,'destroy'])->name('schedule.destroy');

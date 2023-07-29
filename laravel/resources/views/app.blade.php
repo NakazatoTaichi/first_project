@@ -18,7 +18,7 @@
     </head>
     <body>
         <div class="container">
-        <h1 style="font-size: 1.25rem;">My Family</h1>
+        <h1 style="font-size: 4rem; font-family: monospace; text-align: center; padding: 15px;">My Family</h1>
                 @yield('content')
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

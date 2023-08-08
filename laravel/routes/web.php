@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +21,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/schedules', [ScheduleController::class,'index'])->name('schedules.index');
+Route::middleware('auth')->group(function () {
+    Route::get('/schedules', [ScheduleController::class,'index'])->name('schedules.index');
+});
 
 Route::get('/schedules/create', [ScheduleController::class,'create'])->name('schedule.create');
 Route::post('/schedules/store', [ScheduleController::class,'store'])->name('schedule.store');
@@ -29,3 +34,19 @@ Route::put('/schedule/edit/{schedule}', [ScheduleController::class,'update'])->n
 Route::get('/schedules/show/{schedule}', [ScheduleController::class,'show'])->name('schedule.show');
 
 Route::delete('/schedules/{schedule}', [ScheduleController::class,'destroy'])->name('schedule.destroy');
+
+
+Route::get('/users', [UserController::class,'index'])->name('users.index');
+
+Route::get('/users/create', [UserController::class,'create'])->name('user.create');
+Route::post('/users/store', [UserController::class,'store'])->name('user.store');
+
+Route::get('/users/edit/{id}', [UserController::class,'edit'])->name('user.edit');
+Route::post('/users/edit/{id}', [UserController::class,'update'])->name('user.update');
+
+Route::delete('/users/{id}', [UserController::class,'delete'])->name('user.delete');
+
+
+Route::get('/login', [LoginController::class,'show'])->name('login.show');
+Route::post('/login', [LoginController::class,'login'])->name('login.store');
+Route::get('/logout', [LoginController::class,'logout'])->name('logout');

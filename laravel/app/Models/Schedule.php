@@ -14,6 +14,18 @@ class Schedule extends Model
         "dinner",
         "departure_time",
         "arrival_time",
-        "memo"
+        "memo",
+        "user_id"
     ];
+
+    protected $dates = [
+        'created_at',
+        'departure_time',
+        'arrival_time',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

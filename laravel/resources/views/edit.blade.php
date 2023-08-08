@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2 style="font-size: 1rem;">今日の予定</h2>
+            <h2 style="font-size: 2rem;">今日の予定</h2>
         </div>
         <div class="pull-right">
             <a class="btn btn-success" href="{{ url('/schedules') }}">戻る</a>
@@ -18,7 +18,7 @@
     @csrf
     <div class="row">
         <div class="col-6 mb-3 mt-3">
-            <p>外出予定</p>
+            <p style="font-size: 1.25rem;">外出予定</p>
             <div class="form-group">
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="going_out" id="inlineRadio1" value="あり" {{ old ('going_out', $schedule->going_out) == 'あり' ? 'checked' : '' }}>
@@ -29,13 +29,15 @@
                     <label class="form-check-label" for="inlineRadio2">なし</label>
                 </div>
             </div>
-            <!-- @error('going_out')
-            <span style="color:red;">入力してください</span>
-            @enderror -->
+            @error('going_out')
+            <div style="color:red;">
+                <li>{{$message}}</li>
+            </div>
+            @enderror
         </div>
 
         <div class="col-6 mb-3 mt-3">
-            <p>夕飯</p>
+            <p style="font-size: 1.25rem;">夕飯</p>
             <div class="form-group">
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="dinner" id="inlineRadio3" value="必要" {{ old ('dinner', $schedule->dinner) == '必要' ? 'checked' : '' }}>
@@ -46,25 +48,37 @@
                     <label class="form-check-label" for="inlineRadio4">不要</label>
                 </div>
             </div>
-            <!-- @error('dinner')
-            <span style="color:red;">入力してください</span>
-            @enderror -->
+            @error('dinner')
+            <div style="color:red;">
+                <li>{{$message}}</li>
+            </div>
+            @enderror
         </div>
 
         <div class='col-6 mb-3 mt-3'>
-            <p>外出時間</p>
+            <p style="font-size: 1.25rem;">外出時間</p>
             <div class="form-group">
                 <div class='input-group date'>
                     <input type='time' name="departure_time" value="{{ $schedule->departure_time }}" class="form-control"/>
+                    @error('departure_time')
+                    <div style="color:red;">
+                        <li>{{$message}}</li>
+                    </div>
+                    @enderror
                 </div>
             </div>
         </div>
 
         <div class='col-6 mb-3 mt-3'>
-            <p>帰宅時間</p>
+            <p style="font-size: 1.25rem;">帰宅時間</p>
             <div class="form-group">
                 <div class='input-group date'>
                     <input type='time' name="arrival_time" value="{{ $schedule->arrival_time }}" class="form-control"/>
+                    @error('arrival_time')
+                    <div style="color:red;">
+                        <li>{{$message}}</li>
+                    </div>
+                    @enderror
                 </div>
             </div>
         </div>
@@ -72,6 +86,11 @@
         <div class="col-12 mb-3 mt-3">
             <div class="form-group">
             <textarea class="form-control" style="height:100px" name="memo" placeholder="メモ">{{ $schedule->memo }}</textarea>
+            @error('memo')
+            <div style="color:red;">
+                <li>{{$message}}</li>
+            </div>
+            @enderror
             </div>
         </div>
         <div class="col-12 mb-3 mt-3">

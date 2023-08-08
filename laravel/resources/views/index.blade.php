@@ -2,6 +2,11 @@
 
 @section('content')
     <div class="row">
+        <div class="col-lg-12" style="text-align:right">
+            <h4>ログイン者：{{Illuminate\Support\Facades\Auth::user()->name}}</h4>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-lg-12">
             <div class="text-left">
                 <h2 style="font-size: 2rem;">
@@ -10,9 +15,9 @@
                     <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
                 </svg>みんなの予定
                 </h2>
-            </div>
-            <div class="text-light mb-2 mt-2">
-                <a class="btn btn-success" href="{{ route('schedule.create') }}">共有</a>
+                <div class="text-light mb-2 mt-2">
+                    <a class="btn btn-success" href="{{ route('schedule.create') }}">共有</a>
+                </div>
             </div>
         </div>
     </div>
@@ -24,29 +29,29 @@
         </div>
     </div>
 
-    <table class="table table-striped table-hover">
-        <tr>
-            <th>日付</th>
+    <table class="table table-bordered table-hover">
+        <tr align="center">
+            <th>日付 / 時間</th>
+            <th>名前</th>
             <th>外出予定</th>
             <th>夕飯</th>
             <th>外出時刻</th>
             <th>帰宅時刻</th>
             <th></th>
             <th></th>
-            <!-- <th>メモ</th> -->
         </tr>
         @foreach($schedules as $schedule)
-        <tr>
-            <td valign="middle">{{ $schedule->created_at }}</td>
-            <td valign="middle"><a href="{{ route('schedule.show',$schedule->id) }}">{{ $schedule->going_out }}</a></td>
-            <td valign="middle">{{ $schedule->dinner }}</td>
-            <td valign="middle">{{ $schedule->departure_time }}</td>
-            <td valign="middle">{{ $schedule->arrival_time }}</td>
-            <!-- <td style="text-algin:left">{{ $schedule->memo }}</td> -->
-            <td valign="middle" style="text-align:center">
+        <tr valign="middle" align="center">
+            <td>{{ $schedule->created_at->format('m月d日 / H:i') }}</td>
+            <td>{{ $schedule->user->name }}</td>
+            <td><a href="{{ route('schedule.show',$schedule->id) }}">{{ $schedule->going_out }}</a></td>
+            <td>{{ $schedule->dinner }}</td>
+            <td>{{ $schedule->departure_time->format('H:i') }}</td>
+            <td>{{ $schedule->arrival_time->format('H:i') }}</td>
+            <td>
                 <a class="btn btn-primary" href="{{ route('schedule.edit', $schedule->id) }}">変更</a>
             </td>
-            <td valign="middle" style="text-align:center">
+            <td>
                 <form action="{{ route('schedule.destroy',$schedule->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
@@ -60,5 +65,10 @@
         </tr>
         @endforeach
     </table>
+    <div class="row">
+        <div class="col-lg-12" style="text-align:right">
+            <a class="btn btn-light" href="{{ route('logout') }}">ログアウト</a>
+        </div>
+    </div>
 
 @endsection

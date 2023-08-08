@@ -19,7 +19,7 @@
     <body>
         <div class="container">
         <h1 style="font-size: 4rem; font-family: monospace; text-align: center; padding: 15px;">
-            <a href="{{route('users.index')}}" style="text-decoration: none; color: #000">My Family</a>
+            <a href="{{route('schedules.index')}}" style="text-decoration: none; color: #000">My Family</a>
         </h1>
                 @yield('content')
         </div>

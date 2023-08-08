@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Schedule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\CreateScheduleRequest;
+
 
 class ScheduleController extends Controller
 {
@@ -36,7 +39,7 @@ class ScheduleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateScheduleRequest $request)
     {
         // $request->validate([
         //     'going_out' =>'required',
@@ -52,6 +55,7 @@ class ScheduleController extends Controller
         // ]);
 
         $schedule = new Schedule;
+        $schedule->user_id = Auth::user()->id;
         $schedule->going_out = $request->input(["going_out"]);
         $schedule->dinner = $request->input(["dinner"]);
         $schedule->departure_time = $request->input(["departure_time"]);
@@ -91,8 +95,9 @@ class ScheduleController extends Controller
      * @param  \App\Models\Schedule  $schedule
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Schedule $schedule)
+    public function update(CreateScheduleRequest $request, Schedule $schedule)
     {
+        $schedule->user_id = Auth::user()->id;
         $schedule->going_out = $request->input(["going_out"]);
         $schedule->dinner = $request->input(["dinner"]);
         $schedule->departure_time = $request->input(["departure_time"]);

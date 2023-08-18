@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LoginController;
 
 /*
@@ -45,6 +47,21 @@ Route::get('/users/edit/{id}', [UserController::class,'edit'])->name('user.edit'
 Route::post('/users/edit/{id}', [UserController::class,'update'])->name('user.update');
 
 Route::delete('/users/{id}', [UserController::class,'delete'])->name('user.delete');
+
+
+Route::get('/posts', [PostController::class,'index'])->name('posts.index');
+
+Route::get('/posts/create', [PostController::class,'create'])->name('post.create');
+Route::post('/posts/store', [PostController::class,'store'])->name('post.store');
+
+Route::get('/posts/show/{id}', [PostController::class,'show'])->name('post.show');
+
+Route::delete('/posts/{post}/destroy', [PostController::class,'destroy'])->name('post.destroy');
+
+
+Route::post('/posts/{post}/comments', [CommentController::class,'store'])->name('comment.store');
+
+Route::delete('/comments/{comment}/destroy', [CommentController::class,'destroy'])->name('comment.destroy');
 
 
 Route::get('/login', [LoginController::class,'show'])->name('login.show');

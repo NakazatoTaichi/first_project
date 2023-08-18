@@ -24,7 +24,7 @@
         </svg>
             <a href="{{route('schedules.index')}}" style="text-decoration: none; color: #000">My Family</a>
         </h1>
-                @yield('content')
+            @yield('content')
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     </body>

@@ -7,7 +7,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-6">
             <div class="text-left">
                 <h2 style="font-size: 2rem;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-calendar-check" viewBox="0 0 21 21">

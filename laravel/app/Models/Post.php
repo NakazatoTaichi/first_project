@@ -5,29 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\Comment;
 
-
-class Schedule extends Model
+class Post extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        "going_out",
-        "dinner",
-        "departure_time",
-        "arrival_time",
-        "memo",
-        "user_id"
-    ];
-
-    protected $dates = [
-        'created_at',
-        'departure_time',
-        'arrival_time',
+        "title",
+        "content",
+        "comment_count",
+        "user_id",
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
     }
 }
